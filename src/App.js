@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.css";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
 
@@ -32,9 +31,7 @@ export default function App() {
         : { name, phone: countryCode + phone, password };
 
       await registerUser(userData);
-
       resetFields();
-
       navigate("/home", { replace: true });
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
@@ -56,9 +53,7 @@ export default function App() {
         : { phone: countryCode + phone, password };
 
       await loginUser(userData);
-
       resetFields();
-
       navigate("/home", { replace: true });
     } catch (err) {
       if (err.code === "auth/wrong-password") {
@@ -187,4 +182,4 @@ export default function App() {
       )}
     </div>
   );
-}
+                  }
