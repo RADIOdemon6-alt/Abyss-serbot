@@ -2,20 +2,24 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pirata+One&display=swap");
 
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   background: radial-gradient(circle at top left, #0a0f2c, #3d1a5c, #000);
   font-family: "Poppins", sans-serif;
   color: #e0e0e0;
-  overflow: hidden;
+  overflow-x: hidden; /* فقط لمنع الهورايزونتل سكرول */
+  overflow-y: auto;   /* السماح بالتمرير عموديًا */
+  position: relative;
 }
 
 /* ✨ جزيئات مضيئة */
 body::before {
   content: "";
-  position: absolute;
+  position: fixed; /* بدل absolute لتجنب قص الجزيئات على الموبايل */
+  top: 0;
+  left: 0;
   width: 200%;
   height: 200%;
   background: radial-gradient(circle, rgba(162, 89, 255, 0.2) 2px, transparent 2px),
@@ -23,6 +27,7 @@ body::before {
   background-size: 80px 80px;
   animation: moveStars 60s linear infinite;
   z-index: 0;
+  pointer-events: none; /* منع تداخل الجزيئات مع النقر */
 }
 
 @keyframes moveStars {
@@ -34,13 +39,14 @@ body::before {
 .app-container {
   position: relative;
   z-index: 1;
-  height: 100%;
+  min-height: 100vh; /* لضمان تغطية كامل الشاشة */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* 🌌 العنوان */
@@ -63,6 +69,8 @@ body::before {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  flex-wrap: wrap; /* السماح بالانتقال للسطر التالي على الموبايل */
+  justify-content: center;
 }
 
 .toggle-method button {
@@ -73,6 +81,8 @@ body::before {
   color: #e0e0e0;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1 1 120px; /* يوسع الزر ليتناسب مع الشاشة الصغيرة */
+  max-width: 150px;
 }
 
 .toggle-method button:hover,
@@ -91,11 +101,7 @@ body::before {
   max-width: 400px;
   box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
   animation: slideUp 1s ease;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  box-sizing: border-box;
 }
 
 /* 📝 الحقول */
@@ -122,14 +128,19 @@ body::before {
 .phone-box {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* السماح بالانتقال للسطر الثاني على الموبايل */
 }
 
 .phone-box select {
   width: 40%;
+  min-width: 100px;
+  flex: 1;
 }
 
 .phone-box input {
   width: 60%;
+  flex: 2;
+  min-width: 150px;
 }
 
 /* 🔘 الأزرار */
@@ -178,10 +189,6 @@ body::before {
     padding: 20px;
   }
 
-  .toggle-method {
-    flex-direction: column;
-  }
-
   .phone-box {
     flex-direction: column;
   }
@@ -189,5 +196,9 @@ body::before {
   .phone-box select,
   .phone-box input {
     width: 100%;
+  }
+
+  .toggle-method button {
+    max-width: 100%;
   }
 }
