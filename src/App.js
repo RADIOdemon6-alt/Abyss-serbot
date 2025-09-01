@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
-import Home from "./assets/page/home.home";
+import Home from "./assets/page/home.html";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -38,7 +38,7 @@ function AuthForm() {
       resetFields();
 
       // 🌐 إعادة التوجيه باستخدام window.location
-      window.location.href = "./assets/page/home/index.js";
+      window.location.href = "./assets/page/home.html";
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -64,7 +64,7 @@ function AuthForm() {
       resetFields();
 
       // 🌐 إعادة التوجيه باستخدام window.location
-      window.location.href = "./assets/page/home/index.js";
+      window.location.href = "./assets/page/home/home.html";
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
