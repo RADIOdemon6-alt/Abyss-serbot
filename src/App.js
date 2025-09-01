@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 import countries from "./countries.json";
-import { registerUser, loginUser } from "./firebase"; // 🔥 firebase functions
+import { registerUser, loginUser } from "./firebase";
 
 export default function App() {
-  const navigate = useNavigate(); // 🔹 hook للتوجيه
+  const navigate = useNavigate(); // 🔹 للتوجيه
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [countryCode, setCountryCode] = useState("+20");
@@ -26,12 +25,15 @@ export default function App() {
         : { name, phone: countryCode + phone, password };
 
       const uid = await registerUser(userData);
-      setErrorMessage(`✅ تم التسجيل بنجاح، ID: ${uid}`);
-      setIsLogin(true);
+
+      // إعادة ضبط الحقول
       setEmail("");
       setPhone("");
       setPassword("");
       setName("");
+
+      // 🔹 توجيه للصفحة الرئيسية بعد التسجيل
+      navigate("/home", { replace: true });
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -53,7 +55,8 @@ export default function App() {
         : { phone: countryCode + phone, password };
 
       const user = await loginUser(userData);
-      setErrorMessage(`👋 أهلًا ${user.name || "مستخدم"}`);
+
+      // إعادة ضبط الحقول
       setEmail("");
       setPhone("");
       setPassword("");
@@ -187,4 +190,4 @@ export default function App() {
       )}
     </div>
   );
-              }
+            }
