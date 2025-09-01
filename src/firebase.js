@@ -1,17 +1,17 @@
-// 📦 Firebase من CDN
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+// 📦 Firebase من npm
+import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "firebase/auth";
 import { 
   getFirestore, 
   doc, 
   setDoc, 
   getDoc, 
   serverTimestamp 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "firebase/firestore";
 
 // 🔑 إعدادات Firebase الخاصة بمشروعك
 const firebaseConfig = {
