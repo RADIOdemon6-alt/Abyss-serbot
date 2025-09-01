@@ -22,6 +22,12 @@ function AuthForm() {
     setSuccessMessage("");
   };
 
+  const navigateToHome = () => {
+    const baseURL = window.location.origin; // 🌐 دومين ديناميكي
+    const targetPath = "/assets/page/home/home.html";
+    window.location.href = baseURL + targetPath;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -36,9 +42,7 @@ function AuthForm() {
       resetFields();
 
       // ⏱ الانتظار 2 ثانية قبل التنقل
-      setTimeout(() => {
-        window.location.href = "/assets/page/home/home.html";
-      }, 2000);
+      setTimeout(navigateToHome, 2000);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -64,9 +68,7 @@ function AuthForm() {
       resetFields();
 
       // ⏱ الانتظار 2 ثانية قبل التنقل
-      setTimeout(() => {
-        window.location.href = "/assets/page/home/home.html";
-      }, 2000);
+      setTimeout(navigateToHome, 2000);
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
