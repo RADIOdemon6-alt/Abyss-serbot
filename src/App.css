@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0a0a1a, #050510, #000);
+  color: #f0f0f0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* 🔮 جزيئات مضيئة */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 2%, transparent 40%),
+    radial-gradient(circle, rgba(0, 191, 255, 0.2) 2%, transparent 40%);
+  background-size: 200px 200px;
+  animation: moveParticles 20s linear infinite;
+  z-index: -2;
+}
+
+@keyframes moveParticles {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-200px, -200px);
+  }
+}
+
+/* 🌌 تأثير ضباب */
+body::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(10, 10, 26, 0.7), transparent 80%);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.title {
+  font-family: "Pirata One", cursive;
+  font-size: 3rem;
+  color: #8a2be2;
+  text-shadow: 0 0 20px #8a2be2, 0 0 40px #00bfff;
+  animation: glow 3s infinite alternate, fadeIn 2s ease-in;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #8a2be2, 0 0 20px #00bfff;
+  }
+  to {
+    text-shadow: 0 0 25px #00bfff, 0 0 50px #8a2be2;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 300px;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+  animation: slideUp 0.7s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.form-box input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f0f0f0;
+  outline: none;
+}
+
+.form-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #8a2be2, #00bfff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #8a2be2;
+  transition: all 0.3s ease;
+}
+
+.form-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00bfff, 0 0 40px #8a2be2;
+}
+
+.form-box button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 25px #8a2be2 inset;
+}
+
+.switch {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #aaa;
+  cursor: pointer;
+}
+.switch:hover {
+  color: #fff;
+}
