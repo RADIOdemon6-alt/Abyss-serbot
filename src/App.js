@@ -5,7 +5,7 @@ import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
 
 export default function App() {
-  const navigate = useNavigate(); // 🔹 للتوجيه
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
@@ -15,7 +15,14 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // 🟢 تسجيل جديد
+  const resetFields = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setPassword("");
+    setErrorMessage("");
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -24,15 +31,10 @@ export default function App() {
         ? { name, email, password }
         : { name, phone: countryCode + phone, password };
 
-      const uid = await registerUser(userData);
+      await registerUser(userData);
 
-      // إعادة ضبط الحقول
-      setEmail("");
-      setPhone("");
-      setPassword("");
-      setName("");
+      resetFields();
 
-      // 🔹 توجيه للصفحة الرئيسية بعد التسجيل
       navigate("/home", { replace: true });
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
@@ -45,7 +47,6 @@ export default function App() {
     }
   };
 
-  // 🔵 تسجيل الدخول
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -54,14 +55,10 @@ export default function App() {
         ? { email, password }
         : { phone: countryCode + phone, password };
 
-      const user = await loginUser(userData);
+      await loginUser(userData);
 
-      // إعادة ضبط الحقول
-      setEmail("");
-      setPhone("");
-      setPassword("");
+      resetFields();
 
-      // 🔹 توجيه للصفحة الرئيسية بعد تسجيل الدخول
       navigate("/home", { replace: true });
     } catch (err) {
       if (err.code === "auth/wrong-password") {
@@ -129,7 +126,7 @@ export default function App() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
 
           <button type="submit">دخول</button>
-          <p onClick={() => setIsLogin(false)} className="switch">
+          <p onClick={() => { resetFields(); setIsLogin(false); }} className="switch">
             ليس لديك حساب؟ سجّل الآن
           </p>
         </form>
@@ -183,11 +180,11 @@ export default function App() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
 
           <button type="submit">تسجيل</button>
-          <p onClick={() => setIsLogin(true)} className="switch">
+          <p onClick={() => { resetFields(); setIsLogin(true); }} className="switch">
             لديك حساب؟ تسجيل الدخول
           </p>
         </form>
       )}
     </div>
   );
-            }
+}
