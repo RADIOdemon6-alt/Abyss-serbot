@@ -24,6 +24,10 @@ export default function App() {
       const uid = await registerUser(userData);
       alert(`✅ تم التسجيل بنجاح، ID: ${uid}`);
       setIsLogin(true);
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setName("");
     } catch (err) {
       alert("🚨 خطأ في التسجيل: " + err.message);
     }
@@ -39,6 +43,9 @@ export default function App() {
 
       const user = await loginUser(userData);
       alert(`👋 أهلًا ${user.name || "مستخدم"}`);
+      setEmail("");
+      setPhone("");
+      setPassword("");
     } catch (err) {
       alert("🚨 خطأ في تسجيل الدخول: " + err.message);
     }
@@ -168,4 +175,4 @@ export default function App() {
       )}
     </div>
   );
-            }
+              }
