@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pirata+One&display=swap");
+
+body, html {
+  margin:0;
+  padding:0;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top left, #0a0f2c, #3d1a5c, #000);
+  color: #e0e0e0;
+  overflow-x:hidden;
+}
+
+/* Neon Effect */
+.neon {
+  color: #a259ff;
+  text-shadow: 0 0 5px #a259ff, 0 0 10px #00f7ff, 0 0 20px #a259ff;
+}
+
+/* Navbar */
+.nav {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:20px 0;
+  position:relative;
+}
+.nav-item {
+  cursor:pointer;
+  padding:10px 20px;
+  border-radius:20px;
+  transition:0.3s;
+}
+.nav-item.is-active {
+  box-shadow: 0 0 10px #00f7ff,0 0 20px #a259ff;
+}
+
+/* Indicator */
+.nav-indicator {
+  position:absolute;
+  bottom:0;
+  height:5px;
+  width:80px;
+  border-radius:8px 8px 0 0;
+  transition:0.3s;
+}
+
+/* Welcome */
+.welcome-text {
+  font-family:"Pirata One", cursive;
+  font-size:3rem;
+  margin:40px 0;
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+/* Intro Section */
+.intro-section {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+}
+
+/* Profile Image with floating text */
+.profile-container {
+  position:relative;
+}
+.profile-pic {
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  object-fit:cover;
+  animation: float 4s ease-in-out infinite;
+  border: 3px solid #00f7ff;
+  box-shadow: 0 0 20px #00f7ff, 0 0 30px #a259ff;
+}
+.floating-text {
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(120%);
+  text-align:left;
+  animation: floatText 4s ease-in-out infinite;
+}
+
+/* floating animation */
+@keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);} }
+@keyframes floatText { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
+
+/* Languages Table */
+.languages table {
+  margin:20px auto;
+  border-collapse:collapse;
+  width:90%;
+}
+.languages td {
+  padding:10px;
+  border-bottom:1px solid #555;
+}
+
+/* Tools */
+.tools ul {
+  list-style:none;
+  padding:0;
+}
+.tools li {
+  margin:5px 0;
+  padding:5px 10px;
+  display:inline-block;
+  border-radius:8px;
+  background: rgba(0,0,0,0.3);
+}
+
+/* Description */
+.description {
+  margin-top:20px;
+  font-size:1.1rem;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .profile-container{display:flex; flex-direction:column; align-items:center;}
+  .floating-text{position:static; transform:none; text-align:center;}
+                      }
