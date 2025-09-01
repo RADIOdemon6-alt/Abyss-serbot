@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
+import Home from "./assets/page/home"; // 📁 صفحة Home
 
 export default function App() {
-  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
@@ -13,6 +12,8 @@ export default function App() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false); // 🌟 حالة تسجيل الدخول
 
   const resetFields = () => {
     setName("");
@@ -20,19 +21,25 @@ export default function App() {
     setPhone("");
     setPassword("");
     setErrorMessage("");
+    setSuccessMessage("");
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    setSuccessMessage("");
     try {
       const userData = useEmail
         ? { name, email, password }
         : { name, phone: countryCode + phone, password };
 
       await registerUser(userData);
+      setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
-      navigate("/home", { replace: true });
+
+      setTimeout(() => {
+        setLoggedIn(true); // 🌟 عرض الصفحة الرئيسية بدل الفورم
+      }, 1500);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -47,14 +54,19 @@ export default function App() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    setSuccessMessage("");
     try {
       const userData = useEmail
         ? { email, password }
         : { phone: countryCode + phone, password };
 
       await loginUser(userData);
+      setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
-      navigate("/home", { replace: true });
+
+      setTimeout(() => {
+        setLoggedIn(true); // 🌟 عرض الصفحة الرئيسية بدل الفورم
+      }, 1000);
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -65,6 +77,9 @@ export default function App() {
       }
     }
   };
+
+  // ✨ إذا المستخدم مسجل دخول، نعرض Home مباشرة
+  if (loggedIn) return <Home />;
 
   return (
     <div className="app-container">
@@ -119,6 +134,7 @@ export default function App() {
           />
 
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
+          {successMessage && <p className="success-msg">{successMessage}</p>}
 
           <button type="submit">دخول</button>
           <p onClick={() => { resetFields(); setIsLogin(false); }} className="switch">
@@ -173,6 +189,7 @@ export default function App() {
           />
 
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
+          {successMessage && <p className="success-msg">{successMessage}</p>}
 
           <button type="submit">تسجيل</button>
           <p onClick={() => { resetFields(); setIsLogin(true); }} className="switch">
@@ -182,4 +199,4 @@ export default function App() {
       )}
     </div>
   );
-                  }
+                }
