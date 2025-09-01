@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
-import Home from "./assets/page/home.html";
-
-function AuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+import Home from "./assets/page/hrefconst [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,7 +33,7 @@ function AuthForm() {
       setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
 
-      // 🌐 إعادة التوجيه باستخدام window.location
+      // 🌐 تنقل عادي حتى لو ظهر المسار
       window.location.href = "./assets/page/home.html";
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
@@ -63,8 +59,8 @@ function AuthForm() {
       setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
 
-      // 🌐 إعادة التوجيه باستخدام window.location
-      window.location.href = "./assets/page/home/home.html";
+      // 🌐 تنقل عادي حتى لو ظهر المسار
+      window.location.href = "./assets/page/home.html";
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -187,14 +183,4 @@ function AuthForm() {
   );
 }
 
-export default function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AuthForm />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
-  );
-      }
+export default AuthForm;
