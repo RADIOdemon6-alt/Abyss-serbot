@@ -1,4 +1,4 @@
-/* 🌑 Abyss Theme - كامل ومعاد ترتيب الحقول */
+/* 🌑 Abyss Theme */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pirata+One&display=swap");
 
@@ -102,13 +102,6 @@ body::before {
   box-shadow: 0 5px 15px rgba(162, 89, 255, 0.3), 0 10px 25px rgba(0, 247, 255, 0.2);
   animation: slideUp 1s ease;
   box-sizing: border-box;
-  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-box:hover {
-  transform: perspective(800px) rotateX(2deg) rotateY(2deg);
-  box-shadow: 0 8px 20px rgba(162, 89, 255, 0.4), 0 15px 35px rgba(0, 247, 255, 0.3);
 }
 
 @keyframes slideUp {
@@ -163,17 +156,15 @@ body::before {
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.3s, filter 0.3s;
-  transform: perspective(500px) translateZ(0px);
 }
 
 .form-box button:hover {
-  transform: perspective(500px) translateZ(5px) scale(1.05);
+  transform: scale(1.05);
   box-shadow: 0 0 20px #00f7ff, 0 0 30px #a259ff;
-  filter: brightness(1.1);
 }
 
 .form-box button:active {
-  transform: perspective(500px) translateZ(2px) scale(0.95);
+  transform: scale(0.95);
   box-shadow: 0 0 10px #00f7ff, 0 0 15px #a259ff;
 }
 
@@ -188,6 +179,13 @@ body::before {
 .switch:hover {
   color: #00f7ff;
   text-shadow: 0 0 10px #00f7ff;
+}
+
+/* 🛑 رسائل الخطأ */
+.error-msg {
+  margin: 10px 0;
+  color: #ff4c4c;
+  font-weight: bold;
 }
 
 /* 📱 Responsive Design */
@@ -207,16 +205,5 @@ body::before {
 
   .form-box {
     padding: 20px;
-    transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-  }
-
-  .form-box:hover {
-    transform: perspective(600px) rotateX(1deg) rotateY(1deg);
-    box-shadow: 0 5px 15px rgba(162, 89, 255, 0.35), 0 10px 25px rgba(0, 247, 255, 0.25);
-  }
-
-  .form-box button:hover {
-    transform: perspective(500px) translateZ(3px) scale(1.03);
-    box-shadow: 0 0 15px #00f7ff, 0 0 20px #a259ff;
   }
 }
