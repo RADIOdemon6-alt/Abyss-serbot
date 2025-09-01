@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase"; // 🔥 firebase functions
 
 export default function App() {
+  const navigate = useNavigate(); // 🔹 hook للتوجيه
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
 
@@ -31,9 +33,9 @@ export default function App() {
       setPassword("");
       setName("");
     } catch (err) {
-      if(err.code === "auth/email-already-in-use") {
+      if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
-      } else if(err.code === "auth/invalid-email") {
+      } else if (err.code === "auth/invalid-email") {
         setErrorMessage("🚨 الإيميل غير صالح");
       } else {
         setErrorMessage("🚨 خطأ في التسجيل: " + err.message);
@@ -55,10 +57,13 @@ export default function App() {
       setEmail("");
       setPhone("");
       setPassword("");
+
+      // 🔹 توجيه للصفحة الرئيسية بعد تسجيل الدخول
+      navigate("/home", { replace: true });
     } catch (err) {
-      if(err.code === "auth/wrong-password") {
+      if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
-      } else if(err.code === "auth/user-not-found") {
+      } else if (err.code === "auth/user-not-found") {
         setErrorMessage("🚨 لم يتم العثور على المستخدم");
       } else {
         setErrorMessage("🚨 خطأ في تسجيل الدخول: " + err.message);
@@ -71,16 +76,10 @@ export default function App() {
       <h1 className="title">ABYSS-Jadibot</h1>
 
       <div className="toggle-method">
-        <button
-          onClick={() => setUseEmail(false)}
-          className={!useEmail ? "active" : ""}
-        >
+        <button onClick={() => setUseEmail(false)} className={!useEmail ? "active" : ""}>
           📱 هاتف
         </button>
-        <button
-          onClick={() => setUseEmail(true)}
-          className={useEmail ? "active" : ""}
-        >
+        <button onClick={() => setUseEmail(true)} className={useEmail ? "active" : ""}>
           📧 إيميل
         </button>
       </div>
@@ -99,10 +98,7 @@ export default function App() {
             />
           ) : (
             <div className="phone-box">
-              <select
-                value={countryCode}
-                onChange={(e) => setCountryCode(e.target.value)}
-              >
+              <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)}>
                 {countries.map((c, i) => (
                   <option key={i} value={c.code}>
                     {c.flag} {c.name} ({c.code})
@@ -156,10 +152,7 @@ export default function App() {
             />
           ) : (
             <div className="phone-box">
-              <select
-                value={countryCode}
-                onChange={(e) => setCountryCode(e.target.value)}
-              >
+              <select value={countryCode} onChange={(e) => setCountryCode(e.target.value)}>
                 {countries.map((c, i) => (
                   <option key={i} value={c.code}>
                     {c.flag} {c.name} ({c.code})
@@ -194,4 +187,4 @@ export default function App() {
       )}
     </div>
   );
-            }
+              }
