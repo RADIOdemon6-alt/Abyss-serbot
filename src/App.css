@@ -1,4 +1,4 @@
-/* 🌑 Abyss Theme */
+/* 🌑 Abyss Theme - كامل ومعاد ترتيب الحقول */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pirata+One&display=swap");
 
@@ -9,15 +9,15 @@ html, body {
   background: radial-gradient(circle at top left, #0a0f2c, #3d1a5c, #000);
   font-family: "Poppins", sans-serif;
   color: #e0e0e0;
-  overflow-x: hidden; /* فقط لمنع الهورايزونتل سكرول */
-  overflow-y: auto;   /* السماح بالتمرير عموديًا */
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
 /* ✨ جزيئات مضيئة */
 body::before {
   content: "";
-  position: fixed; /* بدل absolute لتجنب قص الجزيئات على الموبايل */
+  position: fixed;
   top: 0;
   left: 0;
   width: 200%;
@@ -27,7 +27,7 @@ body::before {
   background-size: 80px 80px;
   animation: moveStars 60s linear infinite;
   z-index: 0;
-  pointer-events: none; /* منع تداخل الجزيئات مع النقر */
+  pointer-events: none;
 }
 
 @keyframes moveStars {
@@ -39,7 +39,7 @@ body::before {
 .app-container {
   position: relative;
   z-index: 1;
-  min-height: 100vh; /* لضمان تغطية كامل الشاشة */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +69,7 @@ body::before {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
-  flex-wrap: wrap; /* السماح بالانتقال للسطر التالي على الموبايل */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -81,7 +81,7 @@ body::before {
   color: #e0e0e0;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex: 1 1 120px; /* يوسع الزر ليتناسب مع الشاشة الصغيرة */
+  flex: 1 1 120px;
   max-width: 150px;
 }
 
@@ -99,12 +99,24 @@ body::before {
   padding: 30px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(162, 89, 255, 0.3), 0 10px 25px rgba(0, 247, 255, 0.2);
   animation: slideUp 1s ease;
   box-sizing: border-box;
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 📝 الحقول */
+.form-box:hover {
+  transform: perspective(800px) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 8px 20px rgba(162, 89, 255, 0.4), 0 15px 35px rgba(0, 247, 255, 0.3);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* 📝 الحقول العامة */
 .form-box input,
 .form-box select {
   width: 100%;
@@ -117,6 +129,7 @@ body::before {
   color: #e0e0e0;
   font-size: 1rem;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-box input:focus,
@@ -128,19 +141,14 @@ body::before {
 .phone-box {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap; /* السماح بالانتقال للسطر الثاني على الموبايل */
+  flex-wrap: wrap;
 }
 
-.phone-box select {
-  width: 40%;
-  min-width: 100px;
-  flex: 1;
-}
-
+.phone-box select,
 .phone-box input {
-  width: 60%;
-  flex: 2;
-  min-width: 150px;
+  flex: 1 1 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* 🔘 الأزرار */
@@ -154,16 +162,19 @@ body::before {
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.3s;
+  transition: transform 0.2s, box-shadow 0.3s, filter 0.3s;
+  transform: perspective(500px) translateZ(0px);
 }
 
 .form-box button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00f7ff, 0 0 25px #a259ff;
+  transform: perspective(500px) translateZ(5px) scale(1.05);
+  box-shadow: 0 0 20px #00f7ff, 0 0 30px #a259ff;
+  filter: brightness(1.1);
 }
 
 .form-box button:active {
-  transform: scale(0.95);
+  transform: perspective(500px) translateZ(2px) scale(0.95);
+  box-shadow: 0 0 10px #00f7ff, 0 0 15px #a259ff;
 }
 
 /* 🔄 رابط التحويل */
@@ -180,6 +191,15 @@ body::before {
 }
 
 /* 📱 Responsive Design */
+@media (min-width: 601px) {
+  .phone-box select {
+    width: 40%;
+  }
+  .phone-box input {
+    width: 60%;
+  }
+}
+
 @media (max-width: 600px) {
   .title {
     font-size: 2.2rem;
@@ -187,18 +207,16 @@ body::before {
 
   .form-box {
     padding: 20px;
+    transform: perspective(600px) rotateX(0deg) rotateY(0deg);
   }
 
-  .phone-box {
-    flex-direction: column;
+  .form-box:hover {
+    transform: perspective(600px) rotateX(1deg) rotateY(1deg);
+    box-shadow: 0 5px 15px rgba(162, 89, 255, 0.35), 0 10px 25px rgba(0, 247, 255, 0.25);
   }
 
-  .phone-box select,
-  .phone-box input {
-    width: 100%;
-  }
-
-  .toggle-method button {
-    max-width: 100%;
+  .form-box button:hover {
+    transform: perspective(500px) translateZ(3px) scale(1.03);
+    box-shadow: 0 0 15px #00f7ff, 0 0 20px #a259ff;
   }
 }
