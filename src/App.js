@@ -11,7 +11,6 @@ function AuthForm() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const resetFields = () => {
     setName("");
@@ -19,30 +18,24 @@ function AuthForm() {
     setPhone("");
     setPassword("");
     setErrorMessage("");
-    setSuccessMessage("");
   };
 
   const navigateToHome = () => {
-    const baseURL = window.location.origin; // 🌐 دومين ديناميكي
-    const targetPath = "/assets/page/home/home.html";
-    window.location.href = baseURL + targetPath;
+    // 🌐 دومين ديناميكي + صفحة ثابتة
+    window.location.href = window.location.origin + "/assets/page/home/home.html";
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    setSuccessMessage("");
     try {
       const userData = useEmail
         ? { name, email, password }
         : { name, phone: countryCode + phone, password };
 
       await registerUser(userData);
-      setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
-
-      // ⏱ الانتظار 2 ثانية قبل التنقل
-      setTimeout(navigateToHome, 2000);
+      navigateToHome(); // 🚀 تنقل مباشر
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -57,18 +50,14 @@ function AuthForm() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    setSuccessMessage("");
     try {
       const userData = useEmail
         ? { email, password }
         : { phone: countryCode + phone, password };
 
       await loginUser(userData);
-      setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
-
-      // ⏱ الانتظار 2 ثانية قبل التنقل
-      setTimeout(navigateToHome, 2000);
+      navigateToHome(); // 🚀 تنقل مباشر
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -130,7 +119,6 @@ function AuthForm() {
             required
           />
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
-          {successMessage && <p className="success-msg">{successMessage}</p>}
           <button type="submit">دخول</button>
           <p
             type="button"
@@ -187,7 +175,6 @@ function AuthForm() {
             required
           />
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
-          {successMessage && <p className="success-msg">{successMessage}</p>}
           <button type="submit">تسجيل</button>
           <p
             type="button"
