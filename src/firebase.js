@@ -35,15 +35,17 @@ export function phoneToEmail(phone) {
 }
 
 // 🟢 تسجيل مستخدم جديد
-export async function registerUser({ name, phone, password }) {
-  const email = phoneToEmail(phone);
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+export async function registerUser({ name, email, phone, password }) {
+  let finalEmail = email || phoneToEmail(phone); // لو فيه إيميل استخدمه، وإلا حول الهاتف
+
+  const userCredential = await createUserWithEmailAndPassword(auth, finalEmail, password);
   const uid = userCredential.user.uid;
 
   // حفظ البيانات في Firestore
   await setDoc(doc(db, "users", uid), {
     name,
-    phone,
+    email: email || null,
+    phone: phone || null,
     createdAt: serverTimestamp()
   });
 
@@ -51,9 +53,10 @@ export async function registerUser({ name, phone, password }) {
 }
 
 // 🔵 تسجيل دخول
-export async function loginUser({ phone, password }) {
-  const email = phoneToEmail(phone);
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+export async function loginUser({ email, phone, password }) {
+  let finalEmail = email || phoneToEmail(phone);
+
+  const userCredential = await signInWithEmailAndPassword(auth, finalEmail, password);
   const uid = userCredential.user.uid;
 
   // جلب بيانات المستخدم
