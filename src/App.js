@@ -35,8 +35,10 @@ function AuthForm() {
       setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
 
-      // 🌐 تنقل إلى المسار الجديد
-      window.location.href = "/assets/page/home/home.html";
+      // ⏱ الانتظار 2 ثانية قبل التنقل
+      setTimeout(() => {
+        window.location.href = "/assets/page/home/home.html";
+      }, 2000);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -61,8 +63,10 @@ function AuthForm() {
       setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
 
-      // 🌐 تنقل إلى المسار الجديد
-      window.location.href = "/assets/page/home/home.html";
+      // ⏱ الانتظار 2 ثانية قبل التنقل
+      setTimeout(() => {
+        window.location.href = "/assets/page/home/home.html";
+      }, 2000);
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -126,7 +130,14 @@ function AuthForm() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           {successMessage && <p className="success-msg">{successMessage}</p>}
           <button type="submit">دخول</button>
-          <p onClick={() => { resetFields(); setIsLogin(false); }} className="switch">
+          <p
+            type="button"
+            onClick={() => {
+              resetFields();
+              setIsLogin(false);
+            }}
+            className="switch"
+          >
             ليس لديك حساب؟ سجّل الآن
           </p>
         </form>
@@ -176,7 +187,14 @@ function AuthForm() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           {successMessage && <p className="success-msg">{successMessage}</p>}
           <button type="submit">تسجيل</button>
-          <p onClick={() => { resetFields(); setIsLogin(true); }} className="switch">
+          <p
+            type="button"
+            onClick={() => {
+              resetFields();
+              setIsLogin(true);
+            }}
+            className="switch"
+          >
             لديك حساب؟ تسجيل الدخول
           </p>
         </form>
