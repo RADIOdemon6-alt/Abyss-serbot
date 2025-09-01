@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <h1 className="title">🌌 Abyss</h1>
+      <h1 className="title">ABYSS-Jadibot</h1>
 
       <div className="toggle-method">
         <button
