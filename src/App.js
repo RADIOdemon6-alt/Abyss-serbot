@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
 import Home from "./assets/page/home";
 
 function AuthForm() {
-  const navigate = useNavigate(); // 🔥 للتنقل بعد تسجيل الدخول/التسجيل
-
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
@@ -39,7 +37,8 @@ function AuthForm() {
       setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
 
-      navigate("/home"); // 🔥 التنقل مباشرة بعد التسجيل
+      // 🌐 إعادة التوجيه باستخدام window.location
+      window.location.href = "/home";
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -64,7 +63,8 @@ function AuthForm() {
       setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
 
-      navigate("/home"); // 🔥 التنقل مباشرة بعد تسجيل الدخول
+      // 🌐 إعادة التوجيه باستخدام window.location
+      window.location.href = "/home";
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -197,4 +197,4 @@ export default function App() {
       </Routes>
     </Router>
   );
-              }
+      }
