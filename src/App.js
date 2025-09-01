@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
-import Home from "./assets/page/hrefconst [isLogin, setIsLogin] = useState(true);
+import Home from "./assets/page/home";
+
+function AuthForm() {
+  const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,7 +37,7 @@ import Home from "./assets/page/hrefconst [isLogin, setIsLogin] = useState(true)
       resetFields();
 
       // 🌐 تنقل عادي حتى لو ظهر المسار
-      window.location.href = "./assets/page/home.html";
+      window.location.href = "/home.html";
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -60,7 +63,7 @@ import Home from "./assets/page/hrefconst [isLogin, setIsLogin] = useState(true)
       resetFields();
 
       // 🌐 تنقل عادي حتى لو ظهر المسار
-      window.location.href = "./assets/page/home.html";
+      window.location.href = "/home.html";
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
