@@ -1,4 +1,4 @@
-// 📦 Firebase من npm
+// 📦 Firebase SDK
 import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
