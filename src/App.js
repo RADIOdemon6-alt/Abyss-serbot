@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
-import Home from "./assets/page/home"; // 📁 صفحة Home
+import Home from "./assets/page/home";
 
-export default function App() {
+function AuthForm() {
+  const navigate = useNavigate(); // 🔥 للتنقل بعد تسجيل الدخول/التسجيل
+
   const [isLogin, setIsLogin] = useState(true);
   const [useEmail, setUseEmail] = useState(false);
   const [name, setName] = useState("");
@@ -13,7 +16,6 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false); // 🌟 حالة تسجيل الدخول
 
   const resetFields = () => {
     setName("");
@@ -37,9 +39,7 @@ export default function App() {
       setSuccessMessage("✅ تم التسجيل بنجاح!");
       resetFields();
 
-      setTimeout(() => {
-        setLoggedIn(true); // 🌟 عرض الصفحة الرئيسية بدل الفورم
-      }, 1500);
+      navigate("/home"); // 🔥 التنقل مباشرة بعد التسجيل
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -64,9 +64,7 @@ export default function App() {
       setSuccessMessage("✅ تم تسجيل الدخول بنجاح!");
       resetFields();
 
-      setTimeout(() => {
-        setLoggedIn(true); // 🌟 عرض الصفحة الرئيسية بدل الفورم
-      }, 1000);
+      navigate("/home"); // 🔥 التنقل مباشرة بعد تسجيل الدخول
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -77,9 +75,6 @@ export default function App() {
       }
     }
   };
-
-  // ✨ إذا المستخدم مسجل دخول، نعرض Home مباشرة
-  if (loggedIn) return <Home />;
 
   return (
     <div className="app-container">
@@ -97,7 +92,6 @@ export default function App() {
       {isLogin ? (
         <form className="form-box" onSubmit={handleLogin}>
           <h2>تسجيل الدخول</h2>
-
           {useEmail ? (
             <input
               type="email"
@@ -124,7 +118,6 @@ export default function App() {
               />
             </div>
           )}
-
           <input
             type="password"
             placeholder="🔑 كلمة المرور"
@@ -132,10 +125,8 @@ export default function App() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           {successMessage && <p className="success-msg">{successMessage}</p>}
-
           <button type="submit">دخول</button>
           <p onClick={() => { resetFields(); setIsLogin(false); }} className="switch">
             ليس لديك حساب؟ سجّل الآن
@@ -144,7 +135,6 @@ export default function App() {
       ) : (
         <form className="form-box" onSubmit={handleRegister}>
           <h2>تسجيل جديد</h2>
-
           <input
             type="text"
             placeholder="👤 الاسم"
@@ -152,7 +142,6 @@ export default function App() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-
           {useEmail ? (
             <input
               type="email"
@@ -179,7 +168,6 @@ export default function App() {
               />
             </div>
           )}
-
           <input
             type="password"
             placeholder="🔑 كلمة المرور"
@@ -187,10 +175,8 @@ export default function App() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           {successMessage && <p className="success-msg">{successMessage}</p>}
-
           <button type="submit">تسجيل</button>
           <p onClick={() => { resetFields(); setIsLogin(true); }} className="switch">
             لديك حساب؟ تسجيل الدخول
@@ -200,3 +186,15 @@ export default function App() {
     </div>
   );
 }
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthForm />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
+  );
+              }
