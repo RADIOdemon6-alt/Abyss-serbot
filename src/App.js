@@ -12,42 +12,57 @@ export default function App() {
   const [countryCode, setCountryCode] = useState("+20");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // 🟢 تسجيل جديد
   const handleRegister = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
     try {
       const userData = useEmail
         ? { name, email, password }
         : { name, phone: countryCode + phone, password };
 
       const uid = await registerUser(userData);
-      alert(`✅ تم التسجيل بنجاح، ID: ${uid}`);
+      setErrorMessage(`✅ تم التسجيل بنجاح، ID: ${uid}`);
       setIsLogin(true);
       setEmail("");
       setPhone("");
       setPassword("");
       setName("");
     } catch (err) {
-      alert("🚨 خطأ في التسجيل: " + err.message);
+      if(err.code === "auth/email-already-in-use") {
+        setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
+      } else if(err.code === "auth/invalid-email") {
+        setErrorMessage("🚨 الإيميل غير صالح");
+      } else {
+        setErrorMessage("🚨 خطأ في التسجيل: " + err.message);
+      }
     }
   };
 
   // 🔵 تسجيل الدخول
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
     try {
       const userData = useEmail
         ? { email, password }
         : { phone: countryCode + phone, password };
 
       const user = await loginUser(userData);
-      alert(`👋 أهلًا ${user.name || "مستخدم"}`);
+      setErrorMessage(`👋 أهلًا ${user.name || "مستخدم"}`);
       setEmail("");
       setPhone("");
       setPassword("");
     } catch (err) {
-      alert("🚨 خطأ في تسجيل الدخول: " + err.message);
+      if(err.code === "auth/wrong-password") {
+        setErrorMessage("🚨 كلمة المرور خاطئة");
+      } else if(err.code === "auth/user-not-found") {
+        setErrorMessage("🚨 لم يتم العثور على المستخدم");
+      } else {
+        setErrorMessage("🚨 خطأ في تسجيل الدخول: " + err.message);
+      }
     }
   };
 
@@ -112,6 +127,8 @@ export default function App() {
             required
           />
 
+          {errorMessage && <p className="error-msg">{errorMessage}</p>}
+
           <button type="submit">دخول</button>
           <p onClick={() => setIsLogin(false)} className="switch">
             ليس لديك حساب؟ سجّل الآن
@@ -167,6 +184,8 @@ export default function App() {
             required
           />
 
+          {errorMessage && <p className="error-msg">{errorMessage}</p>}
+
           <button type="submit">تسجيل</button>
           <p onClick={() => setIsLogin(true)} className="switch">
             لديك حساب؟ تسجيل الدخول
@@ -175,4 +194,4 @@ export default function App() {
       )}
     </div>
   );
-              }
+            }
