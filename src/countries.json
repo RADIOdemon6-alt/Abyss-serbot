@@ -1,0 +1,23 @@
+[
+  { "code": "+20", "name": "Egypt", "flag": "🇪🇬" },
+  { "code": "+966", "name": "Saudi Arabia", "flag": "🇸🇦" },
+  { "code": "+971", "name": "United Arab Emirates", "flag": "🇦🇪" },
+  { "code": "+965", "name": "Kuwait", "flag": "🇰🇼" },
+  { "code": "+974", "name": "Qatar", "flag": "🇶🇦" },
+  { "code": "+968", "name": "Oman", "flag": "🇴🇲" },
+  { "code": "+973", "name": "Bahrain", "flag": "🇧🇭" },
+  { "code": "+962", "name": "Jordan", "flag": "🇯🇴" },
+  { "code": "+961", "name": "Lebanon", "flag": "🇱🇧" },
+  { "code": "+963", "name": "Syria", "flag": "🇸🇾" },
+  { "code": "+964", "name": "Iraq", "flag": "🇮🇶" },
+  { "code": "+967", "name": "Yemen", "flag": "🇾🇪" },
+  { "code": "+212", "name": "Morocco", "flag": "🇲🇦" },
+  { "code": "+213", "name": "Algeria", "flag": "🇩🇿" },
+  { "code": "+218", "name": "Libya", "flag": "🇱🇾" },
+  { "code": "+216", "name": "Tunisia", "flag": "🇹🇳" },
+  { "code": "+222", "name": "Mauritania", "flag": "🇲🇷" },
+  { "code": "+249", "name": "Sudan", "flag": "🇸🇩" },
+  { "code": "+252", "name": "Somalia", "flag": "🇸🇴" },
+  { "code": "+269", "name": "Comoros", "flag": "🇰🇲" },
+  { "code": "+970", "name": "Palestine", "flag": "🇵🇸" }
+]
