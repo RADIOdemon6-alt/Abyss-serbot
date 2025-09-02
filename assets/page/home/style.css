@@ -61,8 +61,12 @@ body, html {
   padding:20px;
 }
 
-/* Profile Image with floating text */
+/* Desktop layout: image + text side by side */
 .profile-container {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:20px;
   position:relative;
 }
 .profile-pic {
@@ -70,15 +74,13 @@ body, html {
   height:200px;
   border-radius:50%;
   object-fit:cover;
-  animation: float 4s ease-in-out infinite;
   border: 3px solid #00f7ff;
   box-shadow: 0 0 20px #00f7ff, 0 0 30px #a259ff;
+  animation: float 4s ease-in-out infinite;
 }
 .floating-text {
-  position:absolute;
-  top:0;
-  left:50%;
-  transform:translateX(120%);
+  display:flex;
+  flex-direction:column;
   text-align:left;
   animation: floatText 4s ease-in-out infinite;
 }
@@ -119,11 +121,37 @@ body, html {
 
 /* Responsive */
 @media(max-width:768px){
-  .profile-container{display:flex; flex-direction:column; align-items:center;}
-  .floating-text{position:static; transform:none; text-align:center;}
+  .intro-section {
+    flex-direction:column;
+    align-items:center;
+  }
+  .profile-container{
+    flex-direction:column;
+    align-items:center;
+  }
+  .floating-text{
+    text-align:center;
+  }
+  /* Make nav slide from left */
+  .nav {
+    position:fixed;
+    top:0;
+    left:-100%;
+    width:250px;
+    height:100%;
+    flex-direction:column;
+    background:#151A2D;
+    padding:20px;
+    transition:0.4s;
+    z-index:1000;
+  }
+  .nav.active { left:0; }
+  .nav-item {
+    padding:15px 10px;
+    margin-bottom:10px;
+    border-radius:8px;
+  }
 }
 
 /* Helper class for hiding elements */
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
