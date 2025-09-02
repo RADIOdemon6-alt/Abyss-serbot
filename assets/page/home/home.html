@@ -15,14 +15,68 @@
     <link rel="stylesheet" href="Home.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div class="home-container">
+      <!-- Navbar -->
+      <nav class="nav" id="navbar">
+        <a class="nav-item is-active" data-color="orange">Home</a>
+        <a class="nav-item" data-color="green">About</a>
+        <a class="nav-item" data-color="blue">Testimonials</a>
+        <a class="nav-item" data-color="red">Projects</a>
+        <a class="nav-item" data-color="rebeccapurple">Contact</a>
+        <span class="nav-indicator"></span>
+      </nav>
 
-    <!-- React + Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+      <!-- Welcome -->
+      <h2 class="welcome-text neon" id="welcomeText">
+        Welcome to ABYSS Core
+      </h2>
 
-    <!-- ملف index.js -->
-    <script type="text/babel" src="index.js"></script>
+      <!-- Intro -->
+      <div class="intro-section hidden" id="introSection">
+        <div class="profile-container">
+          <img src="profile.jpg" alt="Profile" class="profile-pic" />
+          <div class="floating-text">
+            <h1 class="neon">Welcome, I am Frontend-DEV</h1>
+            <p>المطور</p>
+            <p>الاسم: محمد وليد محمد</p>
+            <p>اللقب: شيطان الإذاعة</p>
+            <p>العمر: 17</p>
+          </div>
+        </div>
+
+        <!-- Languages Table -->
+        <div class="languages">
+          <h3 class="neon">اللغات ونسبة الإتقان</h3>
+          <table>
+            <tbody>
+              <tr><td>HTML</td><td>100%</td></tr>
+              <tr><td>CSS</td><td>100%</td></tr>
+              <tr><td>JS</td><td>90%</td></tr>
+              <tr><td>React</td><td>20%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tools -->
+        <div class="tools">
+          <h3 class="neon">الأدوات التي استخدمها</h3>
+          <ul>
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>Firebase</li>
+            <li>Firebase Auth</li>
+            <li>Firebase Firestore</li>
+          </ul>
+        </div>
+
+        <!-- Description -->
+        <p class="description neon">
+          هذا الموقع عبارة عن عرض سيرتي الذاتية وتنصيب بوت واتس وتعليم فرونت اند (قريبا)
+        </p>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="home.js"></script>
   </body>
-</html>
+  </html>
