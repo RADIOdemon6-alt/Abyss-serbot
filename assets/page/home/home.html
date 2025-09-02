@@ -15,8 +15,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Sidebar Mobile -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="header-logo">
+          <img src="profile.jpg" alt="Profile" />
+        </div>
+        <button class="menu-toggler toggler"><span>☰</span></button>
+      </div>
+      <nav class="sidebar-nav">
+        <ul class="nav-list primary-nav">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
     <div class="home-container">
-      <!-- Navbar -->
+      <!-- Navbar Desktop -->
       <nav class="nav" id="navbar">
         <a class="nav-item is-active" data-color="orange">Home</a>
         <a class="nav-item" data-color="green">About</a>
@@ -56,7 +75,6 @@
             </tbody>
           </table>
         </div>
-
         <!-- Tools -->
         <div class="tools">
           <h3 class="neon">الأدوات التي استخدمها</h3>
@@ -79,4 +97,4 @@
     <!-- JS -->
     <script src="home.js"></script>
   </body>
-  </html>
+</html>
