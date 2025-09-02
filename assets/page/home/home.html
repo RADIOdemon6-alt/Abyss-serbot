@@ -11,16 +11,18 @@
       rel="stylesheet"
     />
 
-    <!-- React من CDN -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
     <!-- CSS -->
     <link rel="stylesheet" href="Home.css" />
   </head>
   <body>
     <div id="root"></div>
-<script type="module" src="index.js"></script> 
+
+    <!-- React + Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- ملف index.js -->
+    <script type="text/babel" src="index.js"></script>
   </body>
 </html>
