@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./home.js"; // لو عندك كومبوننت رئيسي
+import Home from "./Home.js"; // استبدل App بـ Home
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<Home />);
