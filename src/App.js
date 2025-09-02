@@ -21,8 +21,8 @@ function AuthForm() {
   };
 
   const navigateToHome = () => {
-    // 🌐 دومين ديناميكي + صفحة ثابتة
-    window.location.href = window.location.origin + "/assets/page/home/home.html";
+    // ✅ مسار ثابت للجذر
+    window.location.href = "/assets/page/home/home.html";
   };
 
   const handleRegister = async (e) => {
