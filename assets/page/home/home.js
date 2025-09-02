@@ -6,12 +6,22 @@ window.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".sidebar");
   const sidebarToggler = document.querySelector(".sidebar-toggler");
   const menuToggler = document.querySelector(".menu-toggler");
+  const homeContainer = document.querySelector(".home-container");
+
+  // إخفاء كل العناصر أولًا قبل الترحيب
+  if (introSection) introSection.classList.add("hidden");
+  if (sidebar) sidebar.classList.add("hidden");
+  if (homeContainer) homeContainer.style.opacity = "0";
 
   // بعد 5 ثواني: إخفاء الترحيب وعرض باقي المحتوى
   setTimeout(() => {
-    welcomeText.style.display = "none";
-    introSection.classList.remove("hidden");
+    if (welcomeText) welcomeText.style.display = "none";
+    if (introSection) introSection.classList.remove("hidden");
     if (sidebar) sidebar.classList.remove("hidden");
+    if (homeContainer) {
+      homeContainer.style.transition = "opacity 0.5s ease-in";
+      homeContainer.style.opacity = "1";
+    }
   }, 5000);
 
   // التنقل بين التابات
@@ -22,12 +32,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // تغيير لون المؤشر
       const color = item.dataset.color;
-      navIndicator.style.backgroundColor = color;
+      if (navIndicator) navIndicator.style.backgroundColor = color;
     });
   });
 
   // اللون الأول افتراضي
-  navIndicator.style.backgroundColor = "orange";
+  if (navIndicator) navIndicator.style.backgroundColor = "orange";
 
   // التحكم في sidebar (إن وجد)
   if (sidebar && sidebarToggler) {
