@@ -15,35 +15,38 @@ body, html {
   text-shadow: 0 0 5px #a259ff, 0 0 10px #00f7ff, 0 0 20px #a259ff;
 }
 
-/* Sidebar */
-.sidebar {
+/* Sidebar for Desktop & Mobile */
+.nav {
   position: fixed;
-  width: 270px;
-  height: calc(100vh - 32px);
-  margin: 16px;
-  border-radius: 16px;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  flex-direction: column;
   background: #151A2D;
-  transition: all 0.4s ease;
-  z-index: 500;
-}
-.sidebar.collapsed { width: 85px; }
-.sidebar.menu-active { overflow-y: auto; }
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 20px;
-  position: relative;
+  display: flex;
+  gap: 10px;
+  transition: 0.4s;
+  z-index: 1000;
 }
-.header-logo img { width:46px; height:46px; border-radius:50%; }
-.toggler { height:35px; width:35px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:8px; background:#fff; transition:0.4s; }
-.toggler span { font-size:1.5rem; }
-
-.sidebar-nav .nav-list { list-style:none; display:flex; flex-direction:column; gap:8px; padding:10px; }
-.sidebar-nav .nav-link { text-decoration:none; color:#fff; padding:10px 15px; border-radius:8px; display:flex; gap:10px; align-items:center; transition:0.3s; }
-.sidebar-nav .nav-link:hover { background:#fff; color:#151A2D; }
-.sidebar-nav .nav-icon { width:30px; height:30px; border-radius:50%; object-fit:cover; }
+.nav.active {
+  left:0;
+}
+.nav-item {
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition:0.3s;
+  color: #fff;
+}
+.nav-item.is-active {
+  box-shadow: 0 0 10px #00f7ff,0 0 20px #a259ff;
+}
+.nav-item:hover {
+  background:#00f7ff;
+  color:#151A2D;
+}
 
 /* Welcome */
 .welcome-text {
@@ -62,9 +65,10 @@ body, html {
   align-items:center;
   gap:20px;
   padding:20px;
+  margin-left:270px; /* sidebar space on desktop */
 }
 
-/* Desktop layout: image + text side by side */
+/* Profile */
 .profile-container {
   display:flex;
   flex-direction:row;
@@ -87,8 +91,6 @@ body, html {
   text-align:left;
   animation: floatText 4s ease-in-out infinite;
 }
-
-/* floating animation */
 @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);} }
 @keyframes floatText { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
 
@@ -101,6 +103,7 @@ body, html {
 .languages td {
   padding:10px;
   border-bottom:1px solid #555;
+  color:#fff;
 }
 
 /* Tools */
@@ -117,6 +120,7 @@ body, html {
   padding:5px 10px;
   border-radius:8px;
   background: rgba(0,0,0,0.3);
+  color:#fff;
 }
 
 /* Description */
@@ -124,11 +128,13 @@ body, html {
   margin-top:20px;
   font-size:1.1rem;
   text-align:center;
+  color:#fff;
 }
 
 /* Responsive for Mobile */
-@media(max-width:1024px){
+@media(max-width:768px){
   .intro-section {
+    margin-left:0; /* no sidebar offset */
     flex-direction:column;
     align-items:center;
   }
@@ -139,26 +145,23 @@ body, html {
   .floating-text{
     text-align:center;
   }
-  .sidebar {
-    width:100%;
-    height:56px;
+
+  /* Sidebar collapsible as top menu */
+  .nav {
+    width: 100%;
+    height: 56px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
     top:0;
+    left:-100%;
+  }
+  .nav.active { left:0; }
+  .nav-item {
+    padding:10px;
     margin:0;
-    border-radius:0;
-  }
-  .sidebar-header {
-    padding:8px;
-  }
-  .sidebar-nav .nav-list {
-    flex-direction:row;
-    justify-content:space-around;
-    padding:0;
-  }
-  .sidebar-nav .nav-link {
-    padding:8px;
+    border-radius:8px;
     font-size:0.9rem;
   }
 }
-
-/* Helper class for hiding elements */
-.hidden { display: none; }
+.hidden { display:none; }
