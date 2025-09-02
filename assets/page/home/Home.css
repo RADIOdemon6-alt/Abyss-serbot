@@ -121,4 +121,9 @@ body, html {
 @media(max-width:768px){
   .profile-container{display:flex; flex-direction:column; align-items:center;}
   .floating-text{position:static; transform:none; text-align:center;}
-                      }
+}
+
+/* Helper class for hiding elements */
+.hidden {
+  display: none;
+}
