@@ -15,13 +15,14 @@ body, html {
   text-shadow: 0 0 5px #a259ff, 0 0 10px #00f7ff, 0 0 20px #a259ff;
 }
 
-/* Navbar */
+/* Navbar Desktop */
 .nav {
   display:flex;
   justify-content:center;
   gap:10px;
   margin:20px 0;
   position:relative;
+  z-index:500;
 }
 .nav-item {
   cursor:pointer;
@@ -104,11 +105,14 @@ body, html {
 .tools ul {
   list-style:none;
   padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  justify-content:center;
 }
 .tools li {
   margin:5px 0;
   padding:5px 10px;
-  display:inline-block;
   border-radius:8px;
   background: rgba(0,0,0,0.3);
 }
@@ -117,9 +121,10 @@ body, html {
 .description {
   margin-top:20px;
   font-size:1.1rem;
+  text-align:center;
 }
 
-/* Responsive */
+/* Responsive for Mobile */
 @media(max-width:768px){
   .intro-section {
     flex-direction:column;
@@ -132,7 +137,8 @@ body, html {
   .floating-text{
     text-align:center;
   }
-  /* Make nav slide from left */
+
+  /* Navbar as sidebar */
   .nav {
     position:fixed;
     top:0;
