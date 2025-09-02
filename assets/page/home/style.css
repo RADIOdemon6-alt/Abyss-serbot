@@ -15,34 +15,35 @@ body, html {
   text-shadow: 0 0 5px #a259ff, 0 0 10px #00f7ff, 0 0 20px #a259ff;
 }
 
-/* Navbar Desktop */
-.nav {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:20px 0;
-  position:relative;
-  z-index:500;
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  width: 270px;
+  height: calc(100vh - 32px);
+  margin: 16px;
+  border-radius: 16px;
+  background: #151A2D;
+  transition: all 0.4s ease;
+  z-index: 500;
 }
-.nav-item {
-  cursor:pointer;
-  padding:10px 20px;
-  border-radius:20px;
-  transition:0.3s;
-}
-.nav-item.is-active {
-  box-shadow: 0 0 10px #00f7ff,0 0 20px #a259ff;
-}
+.sidebar.collapsed { width: 85px; }
+.sidebar.menu-active { overflow-y: auto; }
 
-/* Indicator */
-.nav-indicator {
-  position:absolute;
-  bottom:0;
-  height:5px;
-  width:80px;
-  border-radius:8px 8px 0 0;
-  transition:0.3s;
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
 }
+.header-logo img { width:46px; height:46px; border-radius:50%; }
+.toggler { height:35px; width:35px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:8px; background:#fff; transition:0.4s; }
+.toggler span { font-size:1.5rem; }
+
+.sidebar-nav .nav-list { list-style:none; display:flex; flex-direction:column; gap:8px; padding:10px; }
+.sidebar-nav .nav-link { text-decoration:none; color:#fff; padding:10px 15px; border-radius:8px; display:flex; gap:10px; align-items:center; transition:0.3s; }
+.sidebar-nav .nav-link:hover { background:#fff; color:#151A2D; }
+.sidebar-nav .nav-icon { width:30px; height:30px; border-radius:50%; object-fit:cover; }
 
 /* Welcome */
 .welcome-text {
@@ -50,6 +51,7 @@ body, html {
   font-size:3rem;
   margin:40px 0;
   animation: fadeIn 2s ease;
+  text-align:center;
 }
 @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
@@ -125,7 +127,7 @@ body, html {
 }
 
 /* Responsive for Mobile */
-@media(max-width:768px){
+@media(max-width:1024px){
   .intro-section {
     flex-direction:column;
     align-items:center;
@@ -137,25 +139,24 @@ body, html {
   .floating-text{
     text-align:center;
   }
-
-  /* Navbar as sidebar */
-  .nav {
-    position:fixed;
+  .sidebar {
+    width:100%;
+    height:56px;
     top:0;
-    left:-100%;
-    width:250px;
-    height:100%;
-    flex-direction:column;
-    background:#151A2D;
-    padding:20px;
-    transition:0.4s;
-    z-index:1000;
+    margin:0;
+    border-radius:0;
   }
-  .nav.active { left:0; }
-  .nav-item {
-    padding:15px 10px;
-    margin-bottom:10px;
-    border-radius:8px;
+  .sidebar-header {
+    padding:8px;
+  }
+  .sidebar-nav .nav-list {
+    flex-direction:row;
+    justify-content:space-around;
+    padding:0;
+  }
+  .sidebar-nav .nav-link {
+    padding:8px;
+    font-size:0.9rem;
   }
 }
 
