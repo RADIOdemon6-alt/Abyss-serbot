@@ -14,3 +14,7 @@ window.addEventListener("load", () => {
     setTimeout(() => { bar.style.width = value + "%"; }, 300);
   });
 });
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+  menuBtn.classList.toggle("active");
+});
