@@ -15,12 +15,13 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- Sidebar -->
-  <aside class="sidebar hidden">
+  
+  <aside class="sidebar">
+    <!-- Sidebar header -->
     <header class="sidebar-header">
-      <div class="header-logo">
-        <img src="profile.jpg" alt="Profile"/>
-      </div>
+      <a href="#" class="header-logo">
+        <img src="logo.png" alt="Abyss Logo">
+      </a>
       <button class="toggler sidebar-toggler">
         <span class="material-symbols-rounded">chevron_left</span>
       </button>
@@ -30,64 +31,104 @@
     </header>
 
     <nav class="sidebar-nav">
+      <!-- Primary top nav -->
       <ul class="nav-list primary-nav">
-        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">home</span><span class="nav-label">Home</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">info</span><span class="nav-label">About</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">chat</span><span class="nav-label">Testimonials</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">work</span><span class="nav-label">Projects</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">call</span><span class="nav-label">Contact</span></a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">home</span>
+            <span class="nav-label">Home</span>
+          </a>
+          <span class="nav-tooltip">Home</span>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">info</span>
+            <span class="nav-label">About</span>
+          </a>
+          <span class="nav-tooltip">About</span>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">shopping_bag</span>
+            <span class="nav-label">Products</span>
+          </a>
+          <span class="nav-tooltip">Products</span>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">call</span>
+            <span class="nav-label">Contact</span>
+          </a>
+          <span class="nav-tooltip">Contact</span>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">reviews</span>
+            <span class="nav-label">Testimonials</span>
+          </a>
+          <span class="nav-tooltip">Testimonials</span>
+        </li>
+      </ul>
+
+      <!-- Secondary bottom nav -->
+      <ul class="nav-list secondary-nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">account_circle</span>
+            <span class="nav-label">Profile</span>
+          </a>
+          <span class="nav-tooltip">Profile</span>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon material-symbols-rounded">logout</span>
+            <span class="nav-label">Logout</span>
+          </a>
+          <span class="nav-tooltip">Logout</span>
+        </li>
       </ul>
     </nav>
   </aside>
 
-  <!-- Main Content -->
-  <div class="home-container">
-    <!-- Welcome -->
-    <h2 class="welcome-text neon" id="welcomeText">Welcome to ABYSS Core</h2>
-
-    <!-- Intro -->
-    <div class="intro-section hidden" id="introSection">
-      <div class="profile-container">
-        <img src="profile.jpg" alt="Profile" class="profile-pic" />
-        <div class="floating-text">
-          <h1 class="neon">Welcome, I am Frontend-DEV</h1>
-          <p>المطور</p>
-          <p>الاسم: محمد وليد محمد</p>
-          <p>اللقب: شيطان الإذاعة</p>
-          <p>العمر: 17</p>
-        </div>
-      </div>
-
-      <!-- Languages -->
-      <div class="languages">
-        <h3 class="neon">اللغات ونسبة الإتقان</h3>
-        <table>
-          <tbody>
-            <tr><td>HTML</td><td>100%</td></tr>
-            <tr><td>CSS</td><td>100%</td></tr>
-            <tr><td>JS</td><td>90%</td></tr>
-            <tr><td>React</td><td>20%</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Tools -->
-      <div class="tools">
-        <h3 class="neon">الأدوات التي استخدمها</h3>
-        <ul>
-          <li>Git</li>
-          <li>GitHub</li>
-          <li>Firebase</li>
-          <li>Firebase Auth</li>
-          <li>Firebase Firestore</li>
-        </ul>
-      </div>
-
-      <p class="description neon">
-        هذا الموقع عبارة عن عرض سيرتي الذاتية وتنصيب بوت واتس وتعليم فرونت اند (قريبا)
-      </p>
+  <!-- Main content -->
+  <main class="content">
+    <div class="floating-text">
+      <h1 class="neon">Welcome, I am Frontend-DEV</h1>
+      <p>المطور</p>
+      <p>الاسم: محمد وليد محمد</p>
+      <p>اللقب: شيطان الإذاعة</p>
+      <p>العمر: 17</p>
     </div>
-  </div>
+
+    <!-- Languages -->
+    <div class="languages">
+      <h3 class="neon">اللغات ونسبة الإتقان</h3>
+      <table>
+        <tbody>
+          <tr><td>HTML</td><td>100%</td></tr>
+          <tr><td>CSS</td><td>100%</td></tr>
+          <tr><td>JS</td><td>90%</td></tr>
+          <tr><td>React</td><td>20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tools -->
+    <div class="tools">
+      <h3 class="neon">الأدوات التي استخدمها</h3>
+      <ul>
+        <li>Git</li>
+        <li>GitHub</li>
+        <li>Firebase</li>
+        <li>Firebase Auth</li>
+        <li>Firebase Firestore</li>
+      </ul>
+    </div>
+
+    <p class="description neon">
+      هذا الموقع عبارة عن عرض سيرتي الذاتية وتنصيب بوت واتس وتعليم فرونت اند (قريبا)
+    </p>
+  </main>
 
   <!-- JS -->
   <script src="home.js"></script>
