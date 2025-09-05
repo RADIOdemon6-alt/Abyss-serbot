@@ -1,4 +1,4 @@
-/* 🌑 Abyss Login Theme - Neon Home Style */
+/* 🌑 Abyss Login Theme - Neon Home Style with Full Background Image */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pirata+One&display=swap");
 
@@ -7,10 +7,30 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top left, #0a0f2c, #3d1a5c, #000);
   color: #e0e0e0;
   overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
+  box-sizing: border-box;
+}
+
+/* ===== خلفية صورة Full Screen مع تأثير Overlay ===== */
+body {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Overlay لزيادة وضوح النصوص */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 15, 44, 0.6);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* ===== خلفية نجوم نيون متحركة ===== */
@@ -43,8 +63,9 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 /* ===== العنوان ===== */
@@ -64,19 +85,15 @@ body::before {
 
 /* ===== صندوق الفورم ===== */
 .form-box {
-  background: rgba(20, 20, 40, 0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(20, 20, 40, 0.95);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 30px;
+  padding: 25px 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
   box-shadow: 0 5px 15px rgba(0,255,255,0.3), 0 10px 25px rgba(162,89,255,0.2);
   animation: slideUp 1s ease;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  box-sizing: border-box;
 }
 
 /* ===== الحقول ===== */
@@ -84,7 +101,7 @@ body::before {
 .form-box select {
   width: 100%;
   padding: 12px 15px;
-  margin: 10px 0;
+  margin: 8px 0;
   border-radius: 12px;
   border: none;
   outline: none;
@@ -92,11 +109,30 @@ body::before {
   color: #e0e0e0;
   font-size: 1rem;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-box input:focus,
 .form-box select:focus {
   box-shadow: 0 0 10px #0ff, 0 0 20px #a259ff;
+}
+
+/* ===== صندوق رقم الهاتف ===== */
+.phone-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.phone-box select,
+.phone-box input {
+  flex: 1 1 100%;
+}
+
+@media (min-width: 601px) {
+  .phone-box select { flex: 0 0 40%; }
+  .phone-box input { flex: 0 0 60%; }
 }
 
 /* ===== الأزرار ===== */
@@ -121,27 +157,6 @@ body::before {
 .form-box button:active {
   transform: scale(0.95);
   box-shadow: 0 0 10px #0ff, 0 0 15px #a259ff;
-}
-
-/* ===== روابط التحويل ===== */
-.switch {
-  margin-top: 15px;
-  cursor: pointer;
-  color: #a259ff;
-  transition: color 0.3s;
-}
-
-.switch:hover {
-  color: #0ff;
-  text-shadow: 0 0 10px #0ff;
-}
-
-/* ===== رسائل الخطأ ===== */
-.error-msg {
-  margin: 10px 0;
-  color: #ff5555;
-  font-weight: bold;
-  text-shadow: 0 0 5px #f00;
 }
 
 /* ===== Toggle method button ===== */
@@ -175,6 +190,27 @@ body::before {
   animation: pulseGlow 2s infinite;
 }
 
+/* ===== رابط التحويل ===== */
+.switch {
+  margin-top: 15px;
+  cursor: pointer;
+  color: #a259ff;
+  transition: color 0.3s;
+}
+
+.switch:hover {
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+}
+
+/* ===== رسائل الخطأ ===== */
+.error-msg {
+  margin: 10px 0;
+  color: #ff5555;
+  font-weight: bold;
+  text-shadow: 0 0 5px #f00;
+}
+
 /* ===== أنيميشن نبض النيون ===== */
 @keyframes pulseGlow {
   0% { box-shadow: 0 0 15px #0ff, 0 0 30px #a259ff; }
@@ -182,8 +218,16 @@ body::before {
   100% { box-shadow: 0 0 15px #0ff, 0 0 30px #a259ff; }
 }
 
+/* ===== أنيميشن Slide Up ===== */
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .title { font-size: 2.2rem; }
-  .form-box { padding: 20px; }
+  .form-box { padding: 20px; max-width: 95%; }
+  .phone-box select,
+  .phone-box input { flex: 1 1 100%; }
 }
