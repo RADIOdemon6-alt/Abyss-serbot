@@ -8,21 +8,32 @@ body, html {
   color: #e0e0e0;
   overflow-x: hidden;
 }
-
 /* زر القائمة */
 .menu-btn {
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 1001;
-  background: #111;
-  border: none;
+  background: rgba(15, 15, 30, 0.9);
+  border: 2px solid #0ff;
   color: #0ff;
-  font-size: 1.5rem;
-  padding: 10px 12px;
-  border-radius: 8px;
+  font-size: 1.6rem;
+  padding: 12px 14px;
+  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 10px #0ff;
+  box-shadow: 0 0 12px #0ff, inset 0 0 8px #000;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 20px #0ff, 0 0 35px #00f;
+}
+
+.menu-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px #0ff, inset 0 0 12px #00f;
 }
 
 /* القائمة الجانبية */
