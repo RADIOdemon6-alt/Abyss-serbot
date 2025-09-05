@@ -2,11 +2,14 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Abyss Home</title>
 
-  <!-- خطوط -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
+
+  <!-- Google Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"/>
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css"/>
@@ -14,21 +17,25 @@
 <body>
   <!-- Sidebar -->
   <aside class="sidebar hidden">
-    <div class="sidebar-header">
+    <header class="sidebar-header">
       <div class="header-logo">
         <img src="profile.jpg" alt="Profile"/>
       </div>
-      <button class="toggler sidebar-toggler"><span>≡</span></button>
-      <button class="toggler menu-toggler"><span>☰</span></button>
-    </div>
+      <button class="toggler sidebar-toggler">
+        <span class="material-symbols-rounded">chevron_left</span>
+      </button>
+      <button class="toggler menu-toggler">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+    </header>
 
     <nav class="sidebar-nav">
       <ul class="nav-list primary-nav">
-        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Projects</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">home</span><span class="nav-label">Home</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">info</span><span class="nav-label">About</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">chat</span><span class="nav-label">Testimonials</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">work</span><span class="nav-label">Projects</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link"><span class="nav-icon material-symbols-rounded">call</span><span class="nav-label">Contact</span></a></li>
       </ul>
     </nav>
   </aside>
@@ -36,9 +43,7 @@
   <!-- Main Content -->
   <div class="home-container">
     <!-- Welcome -->
-    <h2 class="welcome-text neon" id="welcomeText">
-      Welcome to ABYSS Core
-    </h2>
+    <h2 class="welcome-text neon" id="welcomeText">Welcome to ABYSS Core</h2>
 
     <!-- Intro -->
     <div class="intro-section hidden" id="introSection">
@@ -53,7 +58,7 @@
         </div>
       </div>
 
-      <!-- Languages Table -->
+      <!-- Languages -->
       <div class="languages">
         <h3 class="neon">اللغات ونسبة الإتقان</h3>
         <table>
@@ -78,7 +83,6 @@
         </ul>
       </div>
 
-      <!-- Description -->
       <p class="description neon">
         هذا الموقع عبارة عن عرض سيرتي الذاتية وتنصيب بوت واتس وتعليم فرونت اند (قريبا)
       </p>
