@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
+import { useNavigate } from "react-router-dom";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,6 +13,8 @@ function AuthForm() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate(); // 🔑 hook للتنقل
+
   const resetFields = () => {
     setName("");
     setEmail("");
@@ -21,8 +24,8 @@ function AuthForm() {
   };
 
   const navigateToHome = () => {
-    // ✅ مسار ثابت للجذر
-    window.location.href = "./assets/page/home/home.html";
+    // 🚀 تنقل للـ HTML خارج React
+    window.location.href = "/assets/page/home/home.html";
   };
 
   const handleRegister = async (e) => {
@@ -35,7 +38,7 @@ function AuthForm() {
 
       await registerUser(userData);
       resetFields();
-      navigateToHome(); // 🚀 تنقل مباشر
+      navigateToHome();
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
@@ -57,7 +60,7 @@ function AuthForm() {
 
       await loginUser(userData);
       resetFields();
-      navigateToHome(); // 🚀 تنقل مباشر
+      navigateToHome();
     } catch (err) {
       if (err.code === "auth/wrong-password") {
         setErrorMessage("🚨 كلمة المرور خاطئة");
@@ -121,7 +124,6 @@ function AuthForm() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           <button type="submit">دخول</button>
           <p
-            type="button"
             onClick={() => {
               resetFields();
               setIsLogin(false);
@@ -177,7 +179,6 @@ function AuthForm() {
           {errorMessage && <p className="error-msg">{errorMessage}</p>}
           <button type="submit">تسجيل</button>
           <p
-            type="button"
             onClick={() => {
               resetFields();
               setIsLogin(true);
