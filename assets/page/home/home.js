@@ -1,32 +1,16 @@
-window.addEventListener("DOMContentLoaded", () => {
-  const welcomeText = document.getElementById("welcomeText");
-  const introSection = document.getElementById("introSection");
-  const sidebar = document.querySelector(".sidebar");
-  const sidebarToggler = document.querySelector(".sidebar-toggler");
-  const menuToggler = document.querySelector(".menu-toggler");
+// زر القائمة
+const menuBtn = document.getElementById("menu-btn");
+const sidebar = document.getElementById("sidebar");
 
-  // إخفاء كل العناصر قبل الترحيب
-  if (introSection) introSection.classList.add("hidden");
-  if (sidebar) sidebar.classList.add("hidden");
-  if (welcomeText) welcomeText.style.display = "block";
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
 
-  // بعد 5 ثواني: إظهار المحتوى
-  setTimeout(() => {
-    if (welcomeText) welcomeText.style.display = "none";
-    if (introSection) introSection.classList.remove("hidden");
-    if (sidebar) sidebar.classList.remove("hidden");
-  }, 5000);
-
-  // التحكم في sidebar
-  if (sidebar && sidebarToggler) {
-    sidebarToggler.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-    });
-  }
-
-  if (sidebar && menuToggler) {
-    menuToggler.addEventListener("click", () => {
-      sidebar.classList.toggle("menu-active");
-    });
-  }
+// تشغيل الأنيميشن للـ Progress Bars
+window.addEventListener("load", () => {
+  const progresses = document.querySelectorAll(".progress");
+  progresses.forEach(bar => {
+    const value = bar.getAttribute("data-value");
+    setTimeout(() => { bar.style.width = value + "%"; }, 300);
+  });
 });
