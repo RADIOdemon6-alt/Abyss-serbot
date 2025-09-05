@@ -10,10 +10,9 @@ function AuthForm() {
   const [countryCode, setCountryCode] = useState("+20");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState(""); // ✅ رسالة عامة للخطأ أو النجاح
+  const [message, setMessage] = useState(""); // رسالة عامة
   const [messageType, setMessageType] = useState(""); // "error" أو "success"
 
-  // 🔑 إعادة تعيين الحقول
   const resetFields = () => {
     setName("");
     setEmail("");
@@ -23,9 +22,9 @@ function AuthForm() {
     setMessageType("");
   };
 
-  // 🚀 الانتقال لصفحة HTML بعد النجاح
+  // 🚀 الانتقال لصفحة HTML في نافذة جديدة (يضمن العمل على Vercel SPA)
   const navigateToHome = () => {
-    window.location.href = "/assets/page/home/home.html";
+    window.open("/assets/page/home/home.html", "_self");
   };
 
   // 📌 تسجيل مستخدم جديد
@@ -43,7 +42,6 @@ function AuthForm() {
       setMessage("✅ تم التسجيل بنجاح!");
       setMessageType("success");
 
-      // الانتقال بعد 1 ثانية لإظهار الرسالة
       setTimeout(() => {
         resetFields();
         navigateToHome();
@@ -53,7 +51,6 @@ function AuthForm() {
       if (err.code === "auth/email-already-in-use") errorText = "🚨 هذا الحساب مستخدم مسبقًا";
       else if (err.code === "auth/invalid-email") errorText = "🚨 الإيميل غير صالح";
       else if (err.code === "auth/weak-password") errorText = "🚨 كلمة المرور ضعيفة";
-
       setMessage(errorText);
       setMessageType("error");
     }
@@ -74,7 +71,6 @@ function AuthForm() {
       setMessage("✅ تم تسجيل الدخول بنجاح!");
       setMessageType("success");
 
-      // الانتقال بعد 1 ثانية لإظهار الرسالة
       setTimeout(() => {
         resetFields();
         navigateToHome();
@@ -83,7 +79,7 @@ function AuthForm() {
       let errorText = "🚨 خطأ في تسجيل الدخول";
       if (err.code === "auth/wrong-password") errorText = "🚨 كلمة المرور خاطئة";
       else if (err.code === "auth/user-not-found") errorText = "🚨 الحساب غير موجود";
-      else if (!useEmail) errorText = "🚨 رقم الهاتف خاطئ"; // رسالة خاصة بالهاتف
+      else if (!useEmail) errorText = "🚨 رقم الهاتف خاطئ";
       setMessage(errorText);
       setMessageType("error");
     }
@@ -93,7 +89,7 @@ function AuthForm() {
     <div className="app-container">
       <h1 className="title">ABYSS-Jadibot</h1>
 
-      {/* اختيار طريقة التسجيل: إيميل أو هاتف */}
+      {/* اختيار طريقة التسجيل */}
       <div className="toggle-method">
         <button onClick={() => setUseEmail(false)} className={!useEmail ? "active" : ""}>
           📱 هاتف
@@ -103,7 +99,7 @@ function AuthForm() {
         </button>
       </div>
 
-      {/* رسالة الخطأ أو النجاح */}
+      {/* رسائل الخطأ أو النجاح */}
       {message && (
         <p className={messageType === "error" ? "error-msg" : "success-msg"}>{message}</p>
       )}
