@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import countries from "./countries.json";
 import { registerUser, loginUser } from "./firebase";
-import { useNavigate } from "react-router-dom";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,64 +10,82 @@ function AuthForm() {
   const [countryCode, setCountryCode] = useState("+20");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState(""); // ✅ رسالة عامة للخطأ أو النجاح
+  const [messageType, setMessageType] = useState(""); // "error" أو "success"
 
-  const navigate = useNavigate(); // 🔑 hook للتنقل
-
+  // 🔑 إعادة تعيين الحقول
   const resetFields = () => {
     setName("");
     setEmail("");
     setPhone("");
     setPassword("");
-    setErrorMessage("");
+    setMessage("");
+    setMessageType("");
   };
 
+  // 🚀 الانتقال لصفحة HTML بعد النجاح
   const navigateToHome = () => {
-    // 🚀 تنقل للـ HTML خارج React
     window.location.href = "/assets/page/home/home.html";
   };
 
+  // 📌 تسجيل مستخدم جديد
   const handleRegister = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
+    setMessage("");
+    setMessageType("");
+
     try {
       const userData = useEmail
         ? { name, email, password }
         : { name, phone: countryCode + phone, password };
 
       await registerUser(userData);
-      resetFields();
-      navigateToHome();
+      setMessage("✅ تم التسجيل بنجاح!");
+      setMessageType("success");
+
+      // الانتقال بعد 1 ثانية لإظهار الرسالة
+      setTimeout(() => {
+        resetFields();
+        navigateToHome();
+      }, 1000);
     } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        setErrorMessage("🚨 هذا الحساب مستخدم مسبقًا");
-      } else if (err.code === "auth/invalid-email") {
-        setErrorMessage("🚨 الإيميل غير صالح");
-      } else {
-        setErrorMessage("🚨 خطأ في التسجيل: " + err.message);
-      }
+      let errorText = "🚨 خطأ في التسجيل";
+      if (err.code === "auth/email-already-in-use") errorText = "🚨 هذا الحساب مستخدم مسبقًا";
+      else if (err.code === "auth/invalid-email") errorText = "🚨 الإيميل غير صالح";
+      else if (err.code === "auth/weak-password") errorText = "🚨 كلمة المرور ضعيفة";
+
+      setMessage(errorText);
+      setMessageType("error");
     }
   };
 
+  // 📌 تسجيل الدخول
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
+    setMessage("");
+    setMessageType("");
+
     try {
       const userData = useEmail
         ? { email, password }
         : { phone: countryCode + phone, password };
 
       await loginUser(userData);
-      resetFields();
-      navigateToHome();
+      setMessage("✅ تم تسجيل الدخول بنجاح!");
+      setMessageType("success");
+
+      // الانتقال بعد 1 ثانية لإظهار الرسالة
+      setTimeout(() => {
+        resetFields();
+        navigateToHome();
+      }, 1000);
     } catch (err) {
-      if (err.code === "auth/wrong-password") {
-        setErrorMessage("🚨 كلمة المرور خاطئة");
-      } else if (err.code === "auth/user-not-found") {
-        setErrorMessage("🚨 لم يتم العثور على المستخدم");
-      } else {
-        setErrorMessage("🚨 خطأ في تسجيل الدخول: " + err.message);
-      }
+      let errorText = "🚨 خطأ في تسجيل الدخول";
+      if (err.code === "auth/wrong-password") errorText = "🚨 كلمة المرور خاطئة";
+      else if (err.code === "auth/user-not-found") errorText = "🚨 الحساب غير موجود";
+      else if (!useEmail) errorText = "🚨 رقم الهاتف خاطئ"; // رسالة خاصة بالهاتف
+      setMessage(errorText);
+      setMessageType("error");
     }
   };
 
@@ -76,6 +93,7 @@ function AuthForm() {
     <div className="app-container">
       <h1 className="title">ABYSS-Jadibot</h1>
 
+      {/* اختيار طريقة التسجيل: إيميل أو هاتف */}
       <div className="toggle-method">
         <button onClick={() => setUseEmail(false)} className={!useEmail ? "active" : ""}>
           📱 هاتف
@@ -84,6 +102,11 @@ function AuthForm() {
           📧 إيميل
         </button>
       </div>
+
+      {/* رسالة الخطأ أو النجاح */}
+      {message && (
+        <p className={messageType === "error" ? "error-msg" : "success-msg"}>{message}</p>
+      )}
 
       {isLogin ? (
         <form className="form-box" onSubmit={handleLogin}>
@@ -121,7 +144,6 @@ function AuthForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {errorMessage && <p className="error-msg">{errorMessage}</p>}
           <button type="submit">دخول</button>
           <p
             onClick={() => {
@@ -176,7 +198,6 @@ function AuthForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {errorMessage && <p className="error-msg">{errorMessage}</p>}
           <button type="submit">تسجيل</button>
           <p
             onClick={() => {
