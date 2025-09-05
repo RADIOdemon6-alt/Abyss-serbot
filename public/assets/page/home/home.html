@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abyss Home</title>
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- الشريط العلوي -->
+  <header class="top-bar">
+    <button id="menu-btn" class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h1 class="top-title">Welcome to Abyss Core</h1>
+  </header>
+
+  <!-- القائمة -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-container">
+      <img src="profile.jpg" alt="Profile" class="profile-pic" />
+      <div class="profile-info">
+        <h2>محمد وليد محمد</h2>
+        <p>👹 شيطان الإذاعة</p>
+        <p>🎂 العمر: 17</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> عني</a></li>
+        <li><a href="#"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+        <li><a href="#"><i class="fas fa-phone"></i> تواصل</a></li>
+        <li><a href="#"><i class="fas fa-star"></i> التوصيات</a></li>
+        <li><a href="#"><i class="fas fa-user"></i> البروفايل</a></li>
+      </ul>
+
+      <!-- زر تسجيل خروج في الأسفل -->
+      <div class="logout">
+        <a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- المحتوى -->
+  <main class="content">
+    <h1 class="neon">Welcome, I am Frontend-DEV</h1>
+
+    <!-- المهارات -->
+    <section class="languages">
+      <h3 class="neon">📚 المهارات ونسبة الإتقان</h3>
+      <div class="skill"><span>HTML</span><div class="progress-bar"><div class="progress" data-value="100"><span>100%</span></div></div></div>
+      <div class="skill"><span>CSS</span><div class="progress-bar"><div class="progress" data-value="95"><span>95%</span></div></div></div>
+      <div class="skill"><span>JavaScript</span><div class="progress-bar"><div class="progress" data-value="85"><span>85%</span></div></div></div>
+      <div class="skill"><span>React</span><div class="progress-bar"><div class="progress" data-value="40"><span>40%</span></div></div></div>
+    </section>
+
+    <!-- الأدوات -->
+    <section class="tools">
+      <h3 class="neon">🛠 الأدوات التي أستخدمها</h3>
+      <div class="tools-container">
+        <div class="tool"><i class="fab fa-git-alt"></i><span>Git</span></div>
+        <div class="tool"><i class="fab fa-github"></i><span>GitHub</span></div>
+        <div class="tool"><i class="fas fa-fire"></i><span>Firebase</span></div>
+        <div class="tool"><i class="fas fa-user-shield"></i><span>Firebase Auth</span></div>
+        <div class="tool"><i class="fas fa-database"></i><span>Firestore</span></div>
+      </div>
+    </section>
+
+    <p class="description neon">
+      هذا الموقع عبارة عن عرض سيرتي الذاتية وتنصيب بوت واتس وتعليم فرونت اند (قريبا)
+    </p>
+  </main>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+  </html>
