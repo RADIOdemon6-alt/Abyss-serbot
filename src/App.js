@@ -22,7 +22,7 @@ function AuthForm() {
 
   const navigateToHome = () => {
     // ✅ مسار ثابت للجذر
-    window.location.href = "../assets/page/home/home.html";
+    window.location.href = "./assets/page/home/home.html";
   };
 
   const handleRegister = async (e) => {
