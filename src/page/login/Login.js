@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import countries from "./countries.json";
-import { registerUser, loginUser } from "./firebase";
+import countries from "./assets/countries.json";
+import { registerUser, loginUser } from "./assets/firebase";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
